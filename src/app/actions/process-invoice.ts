@@ -1,30 +1,12 @@
 'use server';
 
-// Polyfill Node.js environment
-if (typeof Promise.withResolvers === 'undefined') {
-    // @ts-ignore
-    Promise.withResolvers = function () {
-        let resolve, reject;
-        const promise = new Promise((res, rej) => {
-            resolve = res;
-            reject = rej;
-        });
-        return { promise, resolve, reject };
-    };
-}
-
-if (typeof DOMMatrix === 'undefined') {
-    // @ts-ignore
-    global.DOMMatrix = class DOMMatrix {
-        a: number; b: number; c: number; d: number; e: number; f: number;
-        constructor() {
-            this.a = 1; this.b = 0; this.c = 0; this.d = 1; this.e = 0; this.f = 0;
-        }
-        toString() { return "matrix(1, 0, 0, 1, 0, 0)"; }
-    }
-}
-
 import OpenAI from 'openai';
+// @ts-ignore
+import PDFParser from 'pdf2json';
+
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
 export async function processInvoice(formData: FormData) {
     try {
@@ -33,25 +15,38 @@ export async function processInvoice(formData: FormData) {
             return { error: 'Configuración incompleta: Falta la API Key de OpenAI en el servidor.' };
         }
 
-        const openai = new OpenAI({
-            apiKey: process.env.OPENAI_API_KEY,
-        });
-
-        // @ts-ignore
-        const pdf = require('pdf-parse');
-
         const file = formData.get('file') as File;
         if (!file) {
             throw new Error('No file uploaded');
         }
 
-        // Convert file to buffer for pdf-parse
+        // Convert file to buffer
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
-        // Extract text from PDF
-        const data = await pdf(buffer);
-        const text = data.text;
+        // Extract text from PDF using pdf2json
+        const text = await new Promise<string>((resolve, reject) => {
+            const pdfParser = new PDFParser(null, 1); // 1 = text mode
+
+            pdfParser.on("pdfParser_dataError", (errData: any) => {
+                console.error("PDF Parser Error:", errData);
+                reject(new Error(errData.parserError));
+            });
+
+            pdfParser.on("pdfParser_dataReady", (pdfData: any) => {
+                try {
+                    // pdf2json returns URL-encoded text in older versions or raw text in newer?
+                    // rawTextContent method is reliable usually.
+                    const rawText = pdfParser.getRawTextContent();
+                    resolve(rawText);
+                } catch (e) {
+                    reject(e);
+                }
+            });
+
+            // Parse buffer
+            pdfParser.parseBuffer(buffer);
+        });
 
         if (!text || text.trim().length === 0) {
             console.warn('PDF has no text content');
