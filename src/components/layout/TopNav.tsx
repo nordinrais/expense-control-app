@@ -19,9 +19,9 @@ export default function TopNav() {
     }, [supabase.auth]);
 
     return (
-        <header className="h-16 bg-white border-b border-gray-100 flex items-center justify-between px-6">
+        <header className="h-16 bg-white border-b border-gray-100 flex items-center justify-between px-4 lg:px-6 pl-16 lg:pl-6">
             {/* Search */}
-            <div className="flex items-center gap-4 flex-1 max-w-md">
+            <div className="hidden sm:flex items-center gap-4 flex-1 max-w-md">
                 <div className="relative w-full">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                     <input
