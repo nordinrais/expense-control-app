@@ -23,6 +23,13 @@ export async function processInvoice(formData: FormData) {
         const data = await pdf(buffer);
         const text = data.text;
 
+        if (!text || text.trim().length === 0) {
+            console.warn('PDF has no text content');
+            return { error: 'El PDF parece ser una imagen o escaneado sin texto seleccionable. Intenta con un PDF digital.' };
+        }
+
+        console.log('Extracted text length:', text.length);
+
         // Analyze text with OpenAI
         const completion = await openai.chat.completions.create({
             messages: [
@@ -34,7 +41,7 @@ export async function processInvoice(formData: FormData) {
                     role: "user",
                     content: `Analiza el siguiente texto de una factura y extrae los datos en formato JSON.
                     Texto:
-                    ${text.substring(0, 3000)} -- Limitamos a 3000 chars para no saturar tokens
+                    ${text.substring(0, 3000)}
                     
                     Formato de respuesta esperado (JSON puro sin markdown):
                     {
@@ -53,8 +60,8 @@ export async function processInvoice(formData: FormData) {
         if (!result) throw new Error('No analysis result');
 
         return JSON.parse(result);
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error processing invoice:', error);
-        return { error: 'Error processing invoice' };
+        return { error: error.message || 'Error processing invoice' };
     }
 }

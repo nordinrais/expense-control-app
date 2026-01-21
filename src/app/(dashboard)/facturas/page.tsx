@@ -72,11 +72,11 @@ export default function FacturasPage() {
                     issue_date: result.issue_date || new Date().toISOString().split('T')[0],
                 });
             } else {
-                alert('No se pudieron extraer datos del PDF. Por favor rellena manualmente.');
+                alert(result?.error || 'No se pudieron extraer datos del PDF. Por favor rellena manualmente.');
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error autofilling invoice:', error);
-            alert('Error al procesar el archivo.');
+            alert(`Error al procesar el archivo: ${error.message || 'Error desconocido'}`);
         } finally {
             setIsProcessing(false);
         }
