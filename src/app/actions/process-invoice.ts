@@ -1,16 +1,16 @@
 'use server';
 
 import OpenAI from 'openai';
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-
 export async function processInvoice(formData: FormData) {
     try {
         if (!process.env.OPENAI_API_KEY) {
             console.error('OpenAI API Key missing');
             return { error: 'Configuración incompleta: Falta la API Key de OpenAI en el servidor.' };
         }
+
+        const openai = new OpenAI({
+            apiKey: process.env.OPENAI_API_KEY,
+        });
 
         // @ts-ignore
         const pdf = require('pdf-parse');
