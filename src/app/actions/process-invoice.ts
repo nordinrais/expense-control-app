@@ -1,6 +1,7 @@
 'use server';
 
 import OpenAI from 'openai';
+// @ts-ignore
 import pdf from 'pdf-parse';
 
 const openai = new OpenAI({
