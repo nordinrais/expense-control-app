@@ -1,5 +1,5 @@
 'use client';
-
+import Image from 'next/image';
 import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
@@ -37,11 +37,14 @@ export default function LoginPage() {
             <div className="w-full max-w-md">
                 {/* Logo */}
                 <div className="text-center mb-8">
-                    <div className="inline-flex items-center gap-2">
-                        <div className="w-10 h-10 bg-primary-900 rounded-full flex items-center justify-center">
-                            <span className="text-white font-bold text-lg">E</span>
-                        </div>
-                        <span className="text-2xl font-bold text-gray-900">Estil</span>
+                    <div className="relative w-48 h-16 mx-auto">
+                        <Image
+                            src="/logo-estil.png"
+                            alt="Estil Sofa"
+                            fill
+                            className="object-contain"
+                            priority
+                        />
                     </div>
                     <p className="text-gray-500 mt-2">Control de Gastos y Facturación</p>
                 </div>

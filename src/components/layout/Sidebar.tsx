@@ -1,5 +1,5 @@
 'use client';
-
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -69,11 +69,16 @@ export default function Sidebar() {
             >
                 {/* Logo */}
                 <div className="p-6">
-                    <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-primary-900 rounded-full flex items-center justify-center">
-                            <span className="text-white font-bold text-sm">E</span>
+                    <div className="flex items-center justify-center">
+                        <div className="relative w-40 h-12">
+                            <Image
+                                src="/logo-estil.png"
+                                alt="Estil Sofa"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
                         </div>
-                        <span className="text-xl font-bold text-gray-900">Estil</span>
                     </div>
                 </div>
 
