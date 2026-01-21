@@ -71,8 +71,9 @@ export default function FacturasPage() {
                     provider_customer: result.provider_customer || '',
                     issue_date: result.issue_date || new Date().toISOString().split('T')[0],
                 });
+                // alert('Datos extraídos correctamente: ' + JSON.stringify(result)); // Opcional: Feedback positivo
             } else {
-                alert(result?.error || 'No se pudieron extraer datos del PDF. Por favor rellena manualmente.');
+                alert('Error devuelto por IA: ' + JSON.stringify(result));
             }
         } catch (error: any) {
             console.error('Error autofilling invoice:', error);

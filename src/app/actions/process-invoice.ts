@@ -10,6 +10,11 @@ const openai = new OpenAI({
 
 export async function processInvoice(formData: FormData) {
     try {
+        if (!process.env.OPENAI_API_KEY) {
+            console.error('OpenAI API Key missing');
+            return { error: 'Configuración incompleta: Falta la API Key de OpenAI en el servidor.' };
+        }
+
         const file = formData.get('file') as File;
         if (!file) {
             throw new Error('No file uploaded');
