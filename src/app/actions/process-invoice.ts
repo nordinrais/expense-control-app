@@ -2,7 +2,7 @@
 
 import OpenAI from 'openai';
 // @ts-ignore
-import pdf from 'pdf-parse';
+const pdf = require('pdf-parse');
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
