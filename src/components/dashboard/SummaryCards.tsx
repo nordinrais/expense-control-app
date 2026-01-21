@@ -1,4 +1,4 @@
-import { DollarSign, FileText, TrendingDown, TrendingUp } from 'lucide-react';
+import { DollarSign, FileText, TrendingDown, TrendingUp, Calculator } from 'lucide-react';
 
 interface SummaryCardProps {
     title: string;
@@ -78,6 +78,13 @@ export default function SummaryCards({ totalVentas, totalRecibidas, gastosFijos 
                     )
                 }
                 iconBg={breakeven > 0 ? 'bg-red-100' : 'bg-green-100'}
+            />
+            {/* VAT Summary Card (Estimated 21%) */}
+            <SummaryCard
+                title="IVA a Pagar (Est.)"
+                value={`€${((totalVentas - (totalVentas / 1.21)) - (totalRecibidas - (totalRecibidas / 1.21))).toLocaleString('es-ES', { minimumFractionDigits: 2 })}`}
+                icon={<Calculator className="text-purple-600" size={24} />}
+                iconBg="bg-purple-100"
             />
         </div>
     );

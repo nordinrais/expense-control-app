@@ -14,12 +14,14 @@ import {
     LogOut,
     Menu,
     X,
+    Calculator,
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 
 const navItems = [
     { href: '/dashboard', label: 'Inicio', icon: Home },
+    { href: '/impuestos', label: 'Impuestos', icon: Calculator },
     { href: '/facturas', label: 'Facturas', icon: FileText },
     { href: '/ventas', label: 'Ventas', icon: ShoppingCart },
     { href: '/gastos-fijos', label: 'Gastos Fijos', icon: DollarSign },
