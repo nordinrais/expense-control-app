@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-    title: 'Inva - Control de Gastos y Facturación',
+    title: 'Estil - Control de Gastos y Facturación',
     description: 'Sistema de control de gastos y facturación empresarial',
 };
 

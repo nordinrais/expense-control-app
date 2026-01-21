@@ -60,7 +60,7 @@ export async function processInvoice(formData: FormData) {
             messages: [
                 {
                     role: "system",
-                    content: "Eres un asistente experto en contabilidad. Tu tarea es extraer información estructurada (JSON) de facturas en texto plano. Debes extraer: 'type' (venta para facturas emitidas por 'Inva' o 'Usuario', recibida para facturas de proveedores), 'amount' (el total numérico), 'provider_customer' (nombre de la empresa cliente o proveedor), y 'issue_date' (fecha de emisión en formato YYYY-MM-DD)."
+                    content: "Eres un asistente experto en contabilidad. Tu tarea es extraer información estructurada (JSON) de facturas en texto plano. Debes extraer: 'type' (venta para facturas emitidas por 'Estil' o 'Usuario', recibida para facturas de proveedores), 'amount' (el total numérico), 'provider_customer' (nombre de la empresa cliente o proveedor), y 'issue_date' (fecha de emisión en formato YYYY-MM-DD)."
                 },
                 {
                     role: "user",

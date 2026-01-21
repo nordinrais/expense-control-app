@@ -39,9 +39,9 @@ export default function LoginPage() {
                 <div className="text-center mb-8">
                     <div className="inline-flex items-center gap-2">
                         <div className="w-10 h-10 bg-primary-900 rounded-full flex items-center justify-center">
-                            <span className="text-white font-bold text-lg">I</span>
+                            <span className="text-white font-bold text-lg">E</span>
                         </div>
-                        <span className="text-2xl font-bold text-gray-900">Inva</span>
+                        <span className="text-2xl font-bold text-gray-900">Estil</span>
                     </div>
                     <p className="text-gray-500 mt-2">Control de Gastos y Facturación</p>
                 </div>

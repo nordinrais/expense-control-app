@@ -71,9 +71,9 @@ export default function Sidebar() {
                 <div className="p-6">
                     <div className="flex items-center gap-2">
                         <div className="w-8 h-8 bg-primary-900 rounded-full flex items-center justify-center">
-                            <span className="text-white font-bold text-sm">I</span>
+                            <span className="text-white font-bold text-sm">E</span>
                         </div>
-                        <span className="text-xl font-bold text-gray-900">Inva</span>
+                        <span className="text-xl font-bold text-gray-900">Estil</span>
                     </div>
                 </div>
 
