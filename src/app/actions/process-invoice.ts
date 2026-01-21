@@ -1,3 +1,5 @@
+'use server';
+
 // Polyfill Node.js environment
 if (typeof Promise.withResolvers === 'undefined') {
     // @ts-ignore
@@ -22,9 +24,8 @@ if (typeof DOMMatrix === 'undefined') {
     }
 }
 
-'use server';
-
 import OpenAI from 'openai';
+
 export async function processInvoice(formData: FormData) {
     try {
         if (!process.env.OPENAI_API_KEY) {
