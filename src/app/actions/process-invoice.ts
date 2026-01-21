@@ -1,8 +1,6 @@
 'use server';
 
 import OpenAI from 'openai';
-// @ts-ignore
-import PDFParser from 'pdf2json';
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -26,6 +24,8 @@ export async function processInvoice(formData: FormData) {
 
         // Extract text from PDF using pdf2json
         const text = await new Promise<string>((resolve, reject) => {
+            // @ts-ignore
+            const PDFParser = require('pdf2json');
             const pdfParser = new PDFParser(null, 1); // 1 = text mode
 
             pdfParser.on("pdfParser_dataError", (errData: any) => {
