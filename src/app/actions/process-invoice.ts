@@ -1,3 +1,27 @@
+// Polyfill Node.js environment
+if (typeof Promise.withResolvers === 'undefined') {
+    // @ts-ignore
+    Promise.withResolvers = function () {
+        let resolve, reject;
+        const promise = new Promise((res, rej) => {
+            resolve = res;
+            reject = rej;
+        });
+        return { promise, resolve, reject };
+    };
+}
+
+if (typeof DOMMatrix === 'undefined') {
+    // @ts-ignore
+    global.DOMMatrix = class DOMMatrix {
+        a: number; b: number; c: number; d: number; e: number; f: number;
+        constructor() {
+            this.a = 1; this.b = 0; this.c = 0; this.d = 1; this.e = 0; this.f = 0;
+        }
+        toString() { return "matrix(1, 0, 0, 1, 0, 0)"; }
+    }
+}
+
 'use server';
 
 import OpenAI from 'openai';
