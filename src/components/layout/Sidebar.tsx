@@ -11,6 +11,7 @@ import {
     TrendingUp,
     Settings,
     HelpCircle,
+    FileSpreadsheet,
     LogOut,
     Menu,
     X,
@@ -22,6 +23,7 @@ import { useRouter } from 'next/navigation';
 const navItems = [
     { href: '/dashboard', label: 'Inicio', icon: Home },
     { href: '/impuestos', label: 'Impuestos', icon: Calculator },
+    { href: '/import', label: 'Importar (Excel)', icon: FileSpreadsheet },
     { href: '/facturas', label: 'Facturas', icon: FileText },
     { href: '/ventas', label: 'Ventas', icon: ShoppingCart },
     { href: '/gastos-fijos', label: 'Gastos Fijos', icon: DollarSign },
